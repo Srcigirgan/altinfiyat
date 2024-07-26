@@ -1,0 +1,182 @@
+.AdminEntry {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+  }
+  
+  .login-card, .welcome-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  
+  }
+  
+  .login-card input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .login-card button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  
+  .login-card button:hover {
+    background-color: #0056b3;
+  }
+  
+  .welcome-card h2 {
+    margin-bottom: 20px;
+  }
+  .greenbutton {
+    padding: 10px 20px;
+    background-color: rgb(53, 220, 67);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .greenbutton:hover {
+    background-color: rgb(41, 164, 51);
+  }
+  
+  .card button {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .card button:hover {
+    background-color: #bd2130;
+  }
+ 
+  @media (max-width: 599px) {
+    .card{
+      padding: 20px;
+    }
+    p {
+      font-size: 12px;
+    }
+    img{
+      width: 20px;
+      height: 20px;
+    }
+    h1 {
+      font-size: 18px;
+    }
+    th {
+      font-size: 12px;
+    }
+    td {
+      font-size: 12px;
+    }
+  .logo{
+    width: 200px;
+    height: 80px;
+  }
+  .reklam{
+    width: 60px;
+    height: 20px;
+  }
+  .artisticText{
+    font-size: 16;
+  }
+  }
+  
+  /* Tabletler için yazı boyutları */
+  @media (min-width: 600px) and (max-width: 899px) {
+    .card{
+      padding: 30px;
+    }
+    p {
+      font-size: 15px;
+    }
+    img{
+      width: 25px;
+      height: 25px;
+    }
+    h1 {
+      font-size: 20px;
+    }
+    th {
+      font-size: 15px;
+    }
+    td {
+      font-size: 15px;
+    }
+    .logo{
+      width: 220px;
+      height: 100px;
+    }
+    .reklam{
+      width: 80px;
+      height: 30px;
+    }
+    .artisticText{
+      font-size: 18;
+    }
+  }
+  
+  /* Masaüstü tarayıcılar için yazı boyutları */
+  @media (min-width: 900px) {
+   
+    .login-card,.welcome-card{
+        width: 500px;
+    }
+  }
+  
+  /* büyük ekranlar için yazı boyutları */
+  @media (min-width: 1200px) {
+    .card{
+      padding: 40px;
+    }
+    p {
+      font-size: 20px;
+    }
+    img{
+      width: 35px;
+      height: 35px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    th {
+      font-size: 20px;
+    }
+    td {
+      font-size: 20px;
+    }
+    .logo{
+      width: 300px;
+      height: 120px;
+     
+    
+    }
+    .reklam{
+      width: 120px;
+      height: 40px;
+    }
+    .artisticText{
+      font-size: 22;
+    }
+  }

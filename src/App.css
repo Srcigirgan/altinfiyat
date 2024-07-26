@@ -24,6 +24,10 @@ body, html {
   margin: 20px;
   
 }
+.artisticText{
+  font-family:cursive;
+  font-size:16;
+}
 .logo{
   width: 220px;
   height: 120px;
@@ -78,6 +82,9 @@ p, h1 {
   width: 60px;
   height: 20px;
 }
+.artisticText{
+  font-size: 16;
+}
 }
 
 /* Tabletler için yazı boyutları */
@@ -93,13 +100,13 @@ p, h1 {
     height: 25px;
   }
   h1 {
-    font-size: 22px;
+    font-size: 20px;
   }
   th {
-    font-size: 16px;
+    font-size: 15px;
   }
   td {
-    font-size: 16px;
+    font-size: 15px;
   }
   .logo{
     width: 220px;
@@ -109,7 +116,9 @@ p, h1 {
     width: 80px;
     height: 30px;
   }
-  
+  .artisticText{
+    font-size: 18;
+  }
 }
 
 /* Masaüstü tarayıcılar için yazı boyutları */
@@ -118,20 +127,20 @@ p, h1 {
     padding: 40px;
   }
   p {
-    font-size: 20px;
+    font-size: 16px;
   }
   img{
     width: 30px;
     height: 30px;
   }
   h1 {
-    font-size: 26px;
+    font-size: 22px;
   }
   th {
-    font-size: 20px;
+    font-size: 16px;
   }
   td {
-    font-size: 20px;
+    font-size: 16px;
   }
   .logo{
     width: 260px;
@@ -141,6 +150,9 @@ p, h1 {
     width: 100px;
     height: 35px;
   }
+  .artisticText{
+    font-size: 20;
+  }
 }
 
 /* büyük ekranlar için yazı boyutları */
@@ -149,20 +161,20 @@ p, h1 {
     padding: 40px;
   }
   p {
-    font-size: 24px;
+    font-size: 20px;
   }
   img{
     width: 35px;
     height: 35px;
   }
   h1 {
-    font-size: 32px;
+    font-size: 28px;
   }
   th {
-    font-size: 24px;
+    font-size: 20px;
   }
   td {
-    font-size: 24px;
+    font-size: 20px;
   }
   .logo{
     width: 300px;
@@ -173,6 +185,9 @@ p, h1 {
   .reklam{
     width: 120px;
     height: 40px;
+  }
+  .artisticText{
+    font-size: 22;
   }
 }
 
