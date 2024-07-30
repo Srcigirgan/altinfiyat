@@ -25,11 +25,9 @@ const ImageList = () => {
         }
     };
 
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-        setUsername('');
-        setPassword('');
-        window.location.href = 'http://localhost:3000';
+    const geriGit = () => {
+       
+        window.location.href = 'http://localhost:3000/admin';
     };
 
     const fetchImages = () => {
@@ -95,10 +93,12 @@ const ImageList = () => {
                         {images.map(image => (
                             <div key={image.filename} className="image-item">
                                 <img src={image.url} alt={image.filename} />
-                                <button onClick={() => handleDelete(image.filename)}>SİL</button>
+                                <button onClick={() => handleDelete(image.filename)}>Sil</button>
                             </div>
                         ))}
                     </div>
+                    <button  style={{ backgroundColor: 'red' }} onClick={geriGit}>Geri Dön</button>
+
                 </div>
             )}
         </div>

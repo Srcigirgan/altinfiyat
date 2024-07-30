@@ -44,13 +44,11 @@ const ImageUpload = () => {
             alert('Kullanıcı adı veya şifre yanlış!');
         }
     };
-
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-        setUsername('');
-        setPassword('');
-        window.location.href = 'http://localhost:3000';
+    const geriGit = () => {
+       
+        window.location.href = 'http://localhost:3000/admin';
     };
+  
 
     return (
 
@@ -85,6 +83,7 @@ const ImageUpload = () => {
                     </button>
                 </div>
             )}
+                    <button  style={{ backgroundColor: 'red' }} onClick={geriGit}>Geri Dön</button>
 
         </div>
     );
