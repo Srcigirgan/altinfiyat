@@ -1,0 +1,55 @@
+/* ImageList.css */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+
+.image-list-container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../../assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+  flex-direction: column;
+  }
+  
+  .image-list-container h2 {
+    margin-bottom: 20px;
+    
+  }
+  
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .image-grid img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+  
+  .image-grid img:hover {
+    border-color: #007bff;
+  }
+  
+  .image-item button {
+  
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left:15px;
+  }
+  
+  .image-item button:hover {
+    background-color: darkred;
+  }

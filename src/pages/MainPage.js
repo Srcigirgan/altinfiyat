@@ -8,7 +8,7 @@ import sargold from '../assets/sargold.png';
 import mygold from '../assets/mygold.png';
 import ddiamond from '../assets/ddiamond.png';
 import temaLogo from '../assets/tema-logo.png';
-
+import ImageRotator from './ImageRotator';
 import karamanAltin from '../assets/karamanAltin.png';
 
 // RandomFractionBox bileşeni
@@ -58,18 +58,34 @@ function MainPage() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [prices, setPrices] = useState({
     bilezikFiyat: 10,
+    bilezikFiyat_: 10,
+
     ataLiraFiyat: 10,
+    ataLiraFiyat_: 10,
+
     hamitLiraFiyat: 10,
+    hamitLiraFiyat_: 10,
+
     cumhuriyetLiraFiyat: 10,
+    cumhuriyetLiraFiyat_: 10,
+
     yarimFiyat: 10,
+    yarimFiyat_: 10,
+
     ceyrekFiyat: 10,
+    ceyrekFiyat_: 10,
+
     gramFiyat: 10,
+    gramFiyat_: 10,
+
     yarimEskiFiyat: 10,
+    yarimEskiFiyat_: 10,
+
     ceyrekEskiFiyat: 10,
+    ceyrekEskiFiyat_: 10,
+
     cumhuriyetLiraEskiFiyat: 10,
-    dolarFiyat: 10,
-    euroFiyat: 10,
-    pariteFiyat: 10,
+    cumhuriyetLiraEskiFiyat_: 10,
   });
 
   useEffect(() => {
@@ -94,9 +110,21 @@ function MainPage() {
             yarimEskiFiyat: parseFloat(data?.yarimEskiFiyat),
             ceyrekEskiFiyat: parseFloat(data?.ceyrekEskiFiyat),
             cumhuriyetLiraEskiFiyat: parseFloat(data?.cumhuriyetLiraEskiFiyat),
-            dolarFiyat: parseFloat(data?.dolarFiyat),
-            euroFiyat: parseFloat(data?.euroFiyat),
-            pariteFiyat: parseFloat(data?.pariteFiyat),
+      
+
+            bilezikFiyat_: parseFloat(data?.bilezikFiyat_),
+            ataLiraFiyat_: parseFloat(data?.ataLiraFiyat_),
+            hamitLiraFiyat_: parseFloat(data?.hamitLiraFiyat_),
+            cumhuriyetLiraFiyat_: parseFloat(data?.cumhuriyetLiraFiyat_),
+            yarimFiyat_: parseFloat(data?.yarimFiyat_),
+            ceyrekFiyat_: parseFloat(data?.ceyrekFiyat_),
+            gramFiyat_: parseFloat(data?.gramFiyat_),
+            yarimEskiFiyat_: parseFloat(data?.yarimEskiFiyat_),
+            ceyrekEskiFiyat_: parseFloat(data?.ceyrekEskiFiyat_),
+            cumhuriyetLiraEskiFiyat_: parseFloat(data?.cumhuriyetLiraEskiFiyat_),
+    
+
+            
           })
         );
       } catch (error) {
@@ -106,11 +134,11 @@ function MainPage() {
 
     fetchPrices();
   }, []);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    setIsFlipped((prevIsFlipped) => !prevIsFlipped);
-  };
+// FLİPCARD COMPONENTİ
+//   const handleClick = (e) => {
+//     e.preventDefault();
+//     setIsFlipped((prevIsFlipped) => !prevIsFlipped);
+//   };
 
   const handleClickInsta = () => {
     window.location.href = 'https://www.instagram.com/karamanaltinfiyatlari';
@@ -123,19 +151,19 @@ function MainPage() {
   return (
     <div className="App">
       <img className="logo" src={karamanAltin} alt="Açıklama" />
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+      {/* <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal"> */}
         <div className="card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h1>24 Temmuz Çarşamba</h1>
-            <img onClick={handleClick} src={rotate} alt="Açıklama" />
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom:5 }}>
+            <h1 >24 Temmuz Çarşamba</h1>
+            {/* <img onClick={handleClick} src={rotate} alt="Açıklama" /> */}
           </div>
 
           <table className="invoice-table">
             <thead>
               <tr>
-                <th className='box2' style={{padding:'10px'}} >Altın</th>
+                <th className='box2' style={{padding:'10px', borderTopLeftRadius:8}} >Altın</th>
                 <th className='box2' style={{padding:'10px'}} >Alış</th>
-                <th className='box2' style={{padding:'10px'}} >Satış</th>
+                <th className='box2' style={{padding:'10px' ,borderTopRightRadius:8 }} >Satış</th>
               </tr>
             </thead>
             <tbody>
@@ -145,7 +173,7 @@ function MainPage() {
                   <RandomFractionBox initialNumber={prices.bilezikFiyat} />
                 </td>
                 <td className="box1">
-                  <RandomFractionBox initialNumber={2540.00} />
+                <RandomFractionBox initialNumber={prices.bilezikFiyat_} />
                 </td>
               </tr>
               <tr>
@@ -154,7 +182,7 @@ function MainPage() {
                   <RandomFractionBox initialNumber={prices.ceyrekEskiFiyat} />
                 </td>
                 <td className="box2">
-                  <RandomFractionBox initialNumber={4235.00} />
+                <RandomFractionBox initialNumber={prices.ceyrekEskiFiyat_} />
                 </td>
               </tr>
               <tr>
@@ -163,7 +191,7 @@ function MainPage() {
                   <RandomFractionBox initialNumber={prices.yarimEskiFiyat} />
                 </td>
                 <td className="box1">
-                  <RandomFractionBox initialNumber={8500.00} />
+                <RandomFractionBox initialNumber={prices.yarimEskiFiyat_} />
                 </td>
               </tr>
               <tr>
@@ -172,7 +200,7 @@ function MainPage() {
                   <RandomFractionBox initialNumber={prices.cumhuriyetLiraEskiFiyat} />
                 </td>
                 <td className="box2">
-                  <RandomFractionBox initialNumber={8780.00} />
+                <RandomFractionBox initialNumber={prices.cumhuriyetLiraEskiFiyat_} />
                 </td>
               </tr>
               <tr>
@@ -181,7 +209,7 @@ function MainPage() {
                   <RandomFractionBox initialNumber={prices.ataLiraFiyat} />
                 </td>
                 <td className="box1">
-                  <RandomFractionBox initialNumber={17925.00} />
+                <RandomFractionBox initialNumber={prices.ataLiraFiyat_} />
                 </td>
               </tr>
               <tr>
@@ -190,28 +218,17 @@ function MainPage() {
                   <RandomFractionBox initialNumber={prices.hamitLiraFiyat} />
                 </td>
                 <td className="box2">
-                  <RandomFractionBox initialNumber={17925.00} />
+                <RandomFractionBox initialNumber={prices.hamitLiraFiyat_} />
                 </td>
               </tr>
-              
-             
-              
-              <tr>
-                <th className='box1' >Gram Altın</th>
-                <td className="box1">
-                  <RandomFractionBox initialNumber={prices.gramFiyat} />
-                </td>
-                <td className="box1">
-                  <RandomFractionBox initialNumber={2560.00} />
-                </td>
-              </tr>
+           
               <tr>
                 <th className='box2' >Yeni Çeyrek Altın</th>
                 <td className="box2">
                   <RandomFractionBox initialNumber={prices.ceyrekFiyat} />
                 </td>
                 <td className="box2">
-                  <RandomFractionBox initialNumber={4390.00} />
+                <RandomFractionBox initialNumber={prices.ceyrekFiyat_} />
                 </td>
               </tr>
               <tr>
@@ -220,16 +237,16 @@ function MainPage() {
                   <RandomFractionBox initialNumber={prices.yarimFiyat} />
                 </td>
                 <td className="box1">
-                  <RandomFractionBox initialNumber={8780.00} />
+                <RandomFractionBox initialNumber={prices.yarimFiyat_} />
                 </td>
               </tr>
               <tr>
-                <th className='box2' >Yeni Cumhuriyet Lira</th>
+                <th className='box2' style={{borderBottomLeftRadius:8}} >Yeni Cumhuriyet Lira</th>
                 <td className="box2">
                   <RandomFractionBox initialNumber={prices.cumhuriyetLiraFiyat} />
                 </td>
-                <td className="box2">
-                  <RandomFractionBox initialNumber={17510.00} />
+                <td style={{borderBottomRightRadius:8}} className="box2">
+                <RandomFractionBox initialNumber={prices.cumhuriyetLiraFiyat_} />
                 </td>
               </tr>
               
@@ -238,64 +255,19 @@ function MainPage() {
           <p className='grayText' >Karaman sarraflar derneği'nin tavsiye ettiği fiyat bildirimidir.</p>
 
         </div>
+        <ImageRotator />
 
-        <div className="card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h1 className='smallh1' >24 Temmuz Çarşamba</h1>
-            <img onClick={handleClick} src={rotate} alt="Açıklama" />
-          </div>
-
-          <table className="invoice-table">
-            <thead>
-              <tr>
-              <th className='box2' style={{padding:'10px'}} >Piyasa</th>
-                <th className='box2' style={{padding:'10px'}} >Alış</th>
-                <th className='box2' style={{padding:'10px'}} >Satış</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th className='box1' >Dolar</th>
-                <td className="box1">
-                  <RandomFractionBox initialNumber={prices.dolarFiyat} />
-                </td>
-                <td className="box1">
-                  <RandomFractionBox initialNumber={33.00} />
-                </td>
-              </tr>
-              <tr>
-                <th className='box2' >Euro</th>
-                <td className="box2">
-                  <RandomFractionBox initialNumber={prices.euroFiyat} />
-                </td>
-                <td className="box2">
-                  <RandomFractionBox initialNumber={36.00} />
-                </td>
-              </tr>
-              
-              <tr>
-                <th className='box1' >Parite</th>
-                <td className="box1">
-                  <RandomFractionBox initialNumber={prices.pariteFiyat} />
-                </td>
-                <td className="box1">
-                  <RandomFractionBox initialNumber={4390.00} />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <p className='grayText' >Karaman sarraflar derneği'nin<br />tavsiye ettiği fiyat bildirimidir.</p>
-        </div>
-      </ReactCardFlip>
+     {/* BURAYA EKLENEN DİV FLİPCARD ARKA SAYFASI OLUR
+      </ReactCardFlip> */}
       <h1 className="artisticText">Karaman'ın güncel altın fiyatları...</h1>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin:'10px' }}>
+      {/* <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin:'10px' }}>
             <img className="reklam" src={mygold} />
             <img className="reklam" src={sargold} />
             <img className="reklam" src={ddiamond} />
             <img className="reklam" src={temaLogo} />
 
-          </div>
+          </div> */}
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div onClick={handleClickInsta} className="scaleUp" style={{ display: 'flex', marginTop: '5px', alignItems: 'center', padding: 5 }}>
           <img src={instagram} alt="Açıklama" width={20} height={20} />
