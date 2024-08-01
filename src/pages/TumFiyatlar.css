@@ -1,33 +1,129 @@
-.tum-fiyatlar {
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.TumFiyatlar {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../../assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+  flex-direction: column;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-direction: row;
+  align-self: center;
+  margin: 10px;
+  word-wrap: break-word;
+}
+
+.date-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.artisticText {
+  font-family: cursive;
+  font-size: 16px;
+}
+
+.logo {
+  width: 220px;
+  height: 120px;
+  object-fit: contain;
+  margin: 10px;
+}
+
+.grayText {
+  color: rgb(173, 170, 170);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.invoice-table th, .invoice-table td {
+  border: 1px solid #f4f2ec;
+  text-align: center;
+}
+
+.invoice-table {
+  margin: 0 auto;
+}
+
+.box1 {
+  background-color: rgb(244, 244, 244);
+}
+
+.box2 {
+  background-color: rgb(224, 224, 224);
+}
+.date-selector {
+  margin-bottom: 20px;
+}
+
+.date-selector label {
+  margin-right: 10px;
+}
+
+.date-selector select {
+  padding: 5px;
+}
+
+/* Media Queries */
+
+@media (max-width: 599px) {
+  .card {
     padding: 20px;
   }
-  
-  .button-container {
-    margin-bottom: 20px;
+  p {
+    font-size: 12px;
   }
-  
-  .details-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  img {
+    width: 20px;
+    height: 20px;
   }
-  
-  .details-popup table {
-    width: 100%;
-    border-collapse: collapse;
+  h1 {
+    font-size: 18px;
   }
-  
-  .details-popup th, .details-popup td {
-    border: 1px solid #ddd;
-    padding: 8px;
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .card {
+    padding: 30px;
   }
-  
-  .details-popup button {
-    margin-top: 10px;
+  p {
+    font-size: 15px;
   }
-  
+  img {
+    width: 25px;
+    height: 25px;
+  }
+  h1 {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 900px) {
+  .card {
+    padding: 40px;
+  }
+  p {
+    font-size: 16px;
+  }
+  img {
+    width: 30px;
+    height: 30px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+}

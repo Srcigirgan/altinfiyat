@@ -59,27 +59,34 @@ function MainPage() {
   const [latestDate, setLatestDate] = useState('');
 
   useEffect(() => {
-    const fetchPrices = async () => {
+    const fetchDatesAndPrices = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/prices');
-        if (!response.ok) {
+        // Mevcut tarihleri al
+        const datesResponse = await fetch('http://localhost:3001/api/prices/dates');
+        if (!datesResponse.ok) {
           throw new Error('Network response was not ok');
         }
-        const data = await response.json();
+        const datesData = await datesResponse.json();
 
         // Tarihleri sıralayıp en son tarihi seç
-        const dates = Object.keys(data);
-        const latest = dates[dates.length - 1];
+        const latest = datesData[datesData.length - 1];
         setLatestDate(latest);
 
+        // En güncel tarihli fiyatları al
+        const pricesResponse = await fetch(`http://localhost:3001/api/prices?date=${latest}`);
+        if (!pricesResponse.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const pricesData = await pricesResponse.json();
+
         // En güncel fiyatları ayarla
-        setPrices(data[latest]);
+        setPrices(pricesData);
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
       }
     };
 
-    fetchPrices();
+    fetchDatesAndPrices();
   }, []);
 
   const handleClickInsta = () => {
@@ -89,120 +96,113 @@ function MainPage() {
   const handleClickFace = () => {
     window.location.href = 'https://www.facebook.com/karamanaltinfiyatlari';
   };
-  const formatDate = (dateString) => {
-    // Parse the date string from backend (assuming format is YYYY-MM-DD)
-    const dateObj = new Date(dateString);
 
-    // Options for desired date format
+  const formatDate = (dateString) => {
+    const dateObj = new Date(dateString);
     const options = {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     };
-
-    // Format the date according to options
     return dateObj.toLocaleDateString('tr-TR', options);
   };
 
   return (
     <div className="App">
       <img className="logo" src={karamanAltin} alt="Açıklama" />
-      {/* <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal"> */}
-        <div className="card">
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom:5 }}>
-            <h1>{latestDate ? formatDate(latestDate) : 'Fiyatlar Yükleniyor...'}</h1>
-            {/* <img onClick={handleClick} src={rotate} alt="Açıklama" /> */}
-          </div>
+      <div className="card">
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom:5 }}>
+          <h1>{latestDate ? formatDate(latestDate) : 'Fiyatlar Yükleniyor...'}</h1>
+        </div>
 
-          <table className="invoice-table">
-            <thead>
-              <tr>
-                <th className='box2' style={{padding:'10px', borderTopLeftRadius:8}} >Altın</th>
-                <th className='box2' style={{padding:'10px'}} >Alış</th>
-                <th className='box2' style={{padding:'10px' ,borderTopRightRadius:8 }} >Satış</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th className='box1' >22 Ayar Bilezik</th>
-                <td className="box1">
-                  <RandomFractionBox initialNumber={prices.bilezikFiyat} />
-                </td>
-                <td className="box1">
+        <table className="invoice-table">
+          <thead>
+            <tr>
+              <th className='box2' style={{padding:'10px', borderTopLeftRadius:8}} >Altın</th>
+              <th className='box2' style={{padding:'10px'}} >Alış</th>
+              <th className='box2' style={{padding:'10px' ,borderTopRightRadius:8 }} >Satış</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th className='box1' >22 Ayar Bilezik</th>
+              <td className="box1">
+                <RandomFractionBox initialNumber={prices.bilezikFiyat} />
+              </td>
+              <td className="box1">
                 <RandomFractionBox initialNumber={prices.bilezikFiyat_} />
-                </td>
-              </tr>
-              <tr>
-                <th className='box2' >Çeyrek Altın (Eski)</th>
-                <td className="box2">
-                  <RandomFractionBox initialNumber={prices.ceyrekEskiFiyat} />
-                </td>
-                <td className="box2">
+              </td>
+            </tr>
+            <tr>
+              <th className='box2' >Çeyrek Altın (Eski)</th>
+              <td className="box2">
+                <RandomFractionBox initialNumber={prices.ceyrekEskiFiyat} />
+              </td>
+              <td className="box2">
                 <RandomFractionBox initialNumber={prices.ceyrekEskiFiyat_} />
-                </td>
-              </tr>
-              <tr>
-                <th className='box1' >Yarım Altın (Eski)</th>
-                <td className="box1">
-                  <RandomFractionBox initialNumber={prices.yarimEskiFiyat} />
-                </td>
-                <td className="box1">
+              </td>
+            </tr>
+            <tr>
+              <th className='box1' >Yarım Altın (Eski)</th>
+              <td className="box1">
+                <RandomFractionBox initialNumber={prices.yarimEskiFiyat} />
+              </td>
+              <td className="box1">
                 <RandomFractionBox initialNumber={prices.yarimEskiFiyat_} />
-                </td>
-              </tr>
-              <tr>
-                <th className='box2' >Cumhuriyet Lira (Eski)</th>
-                <td className="box2">
-                  <RandomFractionBox initialNumber={prices.cumhuriyetLiraEskiFiyat} />
-                </td>
-                <td className="box2">
+              </td>
+            </tr>
+            <tr>
+              <th className='box2' >Cumhuriyet Lira (Eski)</th>
+              <td className="box2">
+                <RandomFractionBox initialNumber={prices.cumhuriyetLiraEskiFiyat} />
+              </td>
+              <td className="box2">
                 <RandomFractionBox initialNumber={prices.cumhuriyetLiraEskiFiyat_} />
-                </td>
-              </tr>
-              <tr>
-                <th className='box1' >Ata Lira</th>
-                <td className="box1">
-                  <RandomFractionBox initialNumber={prices.ataLiraFiyat} />
-                </td>
-                <td className="box1">
+              </td>
+            </tr>
+            <tr>
+              <th className='box1' >Ata Lira</th>
+              <td className="box1">
+                <RandomFractionBox initialNumber={prices.ataLiraFiyat} />
+              </td>
+              <td className="box1">
                 <RandomFractionBox initialNumber={prices.ataLiraFiyat_} />
-                </td>
-              </tr>
-              <tr>
-                <th className='box2' >Hamit - Reşat Lira</th>
-                <td className="box2">
-                  <RandomFractionBox initialNumber={prices.hamitLiraFiyat} />
-                </td>
-                <td className="box2">
+              </td>
+            </tr>
+            <tr>
+              <th className='box2' >Hamit - Reşat Lira</th>
+              <td className="box2">
+                <RandomFractionBox initialNumber={prices.hamitLiraFiyat} />
+              </td>
+              <td className="box2">
                 <RandomFractionBox initialNumber={prices.hamitLiraFiyat_} />
-                </td>
-              </tr>
-           
-              <tr>
-                <th className='box2' >Yeni Çeyrek Altın</th>
-                <td className="box2">
-                  <RandomFractionBox initialNumber={prices.ceyrekFiyat} />
-                </td>
-                <td className="box2">
+              </td>
+            </tr>
+            <tr>
+              <th className='box2' >Yeni Çeyrek Altın</th>
+              <td className="box2">
+                <RandomFractionBox initialNumber={prices.ceyrekFiyat} />
+              </td>
+              <td className="box2">
                 <RandomFractionBox initialNumber={prices.ceyrekFiyat_} />
-                </td>
-              </tr>
-              <tr>
-                <th className='box1' >Yeni Yarım Altın</th>
-                <td className="box1">
-                  <RandomFractionBox initialNumber={prices.yarimFiyat} />
-                </td>
-                <td className="box1">
+              </td>
+            </tr>
+            <tr>
+              <th className='box1' >Yeni Yarım Altın</th>
+              <td className="box1">
+                <RandomFractionBox initialNumber={prices.yarimFiyat} />
+              </td>
+              <td className="box1">
                 <RandomFractionBox initialNumber={prices.yarimFiyat_} />
-                </td>
-              </tr>
-              <tr>
-                <th className='box2' style={{borderBottomLeftRadius:8}} >Yeni Cumhuriyet Lira</th>
-                <td className="box2">
-                  <RandomFractionBox initialNumber={prices.cumhuriyetLiraFiyat} />
-                </td>
-                <td style={{borderBottomRightRadius:8}} className="box2">
+              </td>
+            </tr>
+            <tr>
+              <th className='box2' style={{borderBottomLeftRadius:8}} >Yeni Cumhuriyet Lira</th>
+              <td className="box2">
+                <RandomFractionBox initialNumber={prices.cumhuriyetLiraFiyat} />
+              </td>
+              <td style={{borderBottomRightRadius:8}} className="box2">
                 <RandomFractionBox initialNumber={prices.cumhuriyetLiraFiyat_} />
                 </td>
               </tr>
