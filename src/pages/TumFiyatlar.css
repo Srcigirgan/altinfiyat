@@ -1,0 +1,33 @@
+.tum-fiyatlar {
+    padding: 20px;
+  }
+  
+  .button-container {
+    margin-bottom: 20px;
+  }
+  
+  .details-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .details-popup table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .details-popup th, .details-popup td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .details-popup button {
+    margin-top: 10px;
+  }
+  

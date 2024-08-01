@@ -43,9 +43,9 @@
   .welcome-card h2 {
     margin-bottom: 20px;
   }
-  .greenbutton {
+  .menuButton {
     padding: 10px 20px;
-    background-color: rgb(53, 220, 67);
+    background-color: rgb(216, 189, 69);
     color: white;
     border: none;
     border-radius: 5px;

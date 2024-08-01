@@ -21,7 +21,6 @@ const RandomFractionBox = ({ initialNumber }) => {
     setNumber(parseFloat(initialNumber) || 0);
   }, [initialNumber]);
   
-
   useEffect(() => {
     const updateRandomFraction = () => {
       const newFraction = Math.floor(Math.random() * 100);
@@ -56,37 +55,8 @@ const RandomFractionBox = ({ initialNumber }) => {
 // MainPage bileşeni
 function MainPage() {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [prices, setPrices] = useState({
-    bilezikFiyat: 10,
-    bilezikFiyat_: 10,
-
-    ataLiraFiyat: 10,
-    ataLiraFiyat_: 10,
-
-    hamitLiraFiyat: 10,
-    hamitLiraFiyat_: 10,
-
-    cumhuriyetLiraFiyat: 10,
-    cumhuriyetLiraFiyat_: 10,
-
-    yarimFiyat: 10,
-    yarimFiyat_: 10,
-
-    ceyrekFiyat: 10,
-    ceyrekFiyat_: 10,
-
-    gramFiyat: 10,
-    gramFiyat_: 10,
-
-    yarimEskiFiyat: 10,
-    yarimEskiFiyat_: 10,
-
-    ceyrekEskiFiyat: 10,
-    ceyrekEskiFiyat_: 10,
-
-    cumhuriyetLiraEskiFiyat: 10,
-    cumhuriyetLiraEskiFiyat_: 10,
-  });
+  const [prices, setPrices] = useState({});
+  const [latestDate, setLatestDate] = useState('');
 
   useEffect(() => {
     const fetchPrices = async () => {
@@ -96,37 +66,14 @@ function MainPage() {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        console.log(data.gramFiyat);
-    
-        setPrices(prevPrices => 
-          Object.assign({}, prevPrices, {
-            bilezikFiyat: parseFloat(data?.bilezikFiyat),
-            ataLiraFiyat: parseFloat(data?.ataLiraFiyat),
-            hamitLiraFiyat: parseFloat(data?.hamitLiraFiyat),
-            cumhuriyetLiraFiyat: parseFloat(data?.cumhuriyetLiraFiyat),
-            yarimFiyat: parseFloat(data?.yarimFiyat),
-            ceyrekFiyat: parseFloat(data?.ceyrekFiyat),
-            gramFiyat: parseFloat(data?.gramFiyat),
-            yarimEskiFiyat: parseFloat(data?.yarimEskiFiyat),
-            ceyrekEskiFiyat: parseFloat(data?.ceyrekEskiFiyat),
-            cumhuriyetLiraEskiFiyat: parseFloat(data?.cumhuriyetLiraEskiFiyat),
-      
 
-            bilezikFiyat_: parseFloat(data?.bilezikFiyat_),
-            ataLiraFiyat_: parseFloat(data?.ataLiraFiyat_),
-            hamitLiraFiyat_: parseFloat(data?.hamitLiraFiyat_),
-            cumhuriyetLiraFiyat_: parseFloat(data?.cumhuriyetLiraFiyat_),
-            yarimFiyat_: parseFloat(data?.yarimFiyat_),
-            ceyrekFiyat_: parseFloat(data?.ceyrekFiyat_),
-            gramFiyat_: parseFloat(data?.gramFiyat_),
-            yarimEskiFiyat_: parseFloat(data?.yarimEskiFiyat_),
-            ceyrekEskiFiyat_: parseFloat(data?.ceyrekEskiFiyat_),
-            cumhuriyetLiraEskiFiyat_: parseFloat(data?.cumhuriyetLiraEskiFiyat_),
-    
+        // Tarihleri sıralayıp en son tarihi seç
+        const dates = Object.keys(data);
+        const latest = dates[dates.length - 1];
+        setLatestDate(latest);
 
-            
-          })
-        );
+        // En güncel fiyatları ayarla
+        setPrices(data[latest]);
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
       }
@@ -134,11 +81,6 @@ function MainPage() {
 
     fetchPrices();
   }, []);
-// FLİPCARD COMPONENTİ
-//   const handleClick = (e) => {
-//     e.preventDefault();
-//     setIsFlipped((prevIsFlipped) => !prevIsFlipped);
-//   };
 
   const handleClickInsta = () => {
     window.location.href = 'https://www.instagram.com/karamanaltinfiyatlari';
@@ -147,6 +89,21 @@ function MainPage() {
   const handleClickFace = () => {
     window.location.href = 'https://www.facebook.com/karamanaltinfiyatlari';
   };
+  const formatDate = (dateString) => {
+    // Parse the date string from backend (assuming format is YYYY-MM-DD)
+    const dateObj = new Date(dateString);
+
+    // Options for desired date format
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+
+    // Format the date according to options
+    return dateObj.toLocaleDateString('tr-TR', options);
+  };
 
   return (
     <div className="App">
@@ -154,7 +111,7 @@ function MainPage() {
       {/* <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal"> */}
         <div className="card">
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom:5 }}>
-            <h1 >24 Temmuz Çarşamba</h1>
+            <h1>{latestDate ? formatDate(latestDate) : 'Fiyatlar Yükleniyor...'}</h1>
             {/* <img onClick={handleClick} src={rotate} alt="Açıklama" /> */}
           </div>
 
@@ -253,33 +210,31 @@ function MainPage() {
             </tbody>
           </table>
           <p className='grayText' >Karaman sarraflar derneği'nin tavsiye ettiği fiyat bildirimidir.</p>
-
-        </div>
+{/* YA BUNUN ALTINDAKİ DİV KALKACAK BU ZATEN VARDI */}
+        </div> 
         <ImageRotator />
 
-     {/* BURAYA EKLENEN DİV FLİPCARD ARKA SAYFASI OLUR
-      </ReactCardFlip> */}
-      <h1 className="artisticText">Karaman'ın güncel altın fiyatları...</h1>
+{/* BURAYA EKLENEN DİV FLİPCARD ARKA SAYFASI OLUR */}
+{/* <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal"> */}
+{/* <div>Back of the card</div> */}
+{/* </ReactCardFlip> */}
+{/* VEYA TAM BURADAN SİLİNEN DİV EKLENECEK */}
 
-      {/* <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin:'10px' }}>
-            <img className="reklam" src={mygold} />
-            <img className="reklam" src={sargold} />
-            <img className="reklam" src={ddiamond} />
-            <img className="reklam" src={temaLogo} />
+<h1 className="artisticText">Karaman'ın güncel altın fiyatları...</h1>
 
-          </div> */}
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <div onClick={handleClickInsta} className="scaleUp" style={{ display: 'flex', marginTop: '5px', alignItems: 'center', padding: 5 }}>
-          <img src={instagram} alt="Açıklama" width={20} height={20} />
-          <p style={{ marginLeft: 5 }}>@karamanaltinfiyatlari</p>
-        </div>
-        <div onClick={handleClickFace} className="scaleUp" style={{ display: 'flex', margin: '5px', alignItems: 'center', padding: 5 }}>
-          <img src={facebook} alt="Açıklama" width={20} height={20} />
-          <p style={{ marginLeft: 5 }}>Karaman Altın Fiyatları</p>
-        </div>
-      </div>
-    </div>
-  );
+<div style={{ display: 'flex', alignItems: 'center' }}>
+<div onClick={handleClickInsta} className="scaleUp" style={{ display: 'flex', marginTop: '5px', alignItems: 'center', padding: 5 }}>
+  <img src={instagram} alt="Açıklama" width={20} height={20} />
+  <p style={{ marginLeft: 5 }}>@karamanaltinfiyatlari</p>
+</div>
+<div onClick={handleClickFace} className="scaleUp" style={{ display: 'flex', margin: '5px', alignItems: 'center', padding: 5 }}>
+  <img src={facebook} alt="Açıklama" width={20} height={20} />
+  <p style={{ marginLeft: 5 }}>Karaman Altın Fiyatları</p>
+</div>
+</div>
+</div>
+);
 }
 
 export default MainPage;
+

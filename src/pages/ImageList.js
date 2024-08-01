@@ -1,33 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ImageList.css';  // CSS dosyasını import et
+import { useNavigate } from 'react-router-dom';
 
 const ImageList = () => {
     const [images, setImages] = useState([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
-    const handleLogin = () => {
-        const credentials = [
-            { username: 'Admin', password: 'karamanAltin1./ab' },
-            { username: 'Salih', password: '123321.Ee' }
-        ];
-
-        const user = credentials.find(
-            (cred) => cred.username === username && cred.password === password
-        );
-
-        if (user) {
-            setIsLoggedIn(true);
-        } else {
-            alert('Kullanıcı adı veya şifre yanlış!');
+   
+    const navigate = useNavigate();
+   
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/login');
         }
-    };
+      }, [navigate]);
 
-    const geriGit = () => {
-       
-        window.location.href = 'http://localhost:3000/admin';
+   
+
+     const geriGit = () => {
+        navigate('/admin');
     };
 
     const fetchImages = () => {
@@ -65,24 +56,7 @@ const ImageList = () => {
     return (
         <div className="image-list-container">
             <h2>Yüklü Görseller</h2>
-            {!isLoggedIn ? (
-                <div className="login-card">
-                    <h2>Giriş Yap</h2>
-                    <input
-                        type="text"
-                        placeholder="Kullanıcı Adı"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Şifre"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <button onClick={handleLogin}>Giriş Yap</button>
-                </div>
-            ) : (
+           
                 <div>
                     <p className='notText' >Ekranda görünmesini istemediğiniz tüm görselleri Sil'e basarak silebilirsiniz</p>
                     <p className='notText' >Not: Burada bulunan bütün görseller anasayfada görüntülenecektir</p>
@@ -97,10 +71,10 @@ const ImageList = () => {
                             </div>
                         ))}
                     </div>
-                    <button  style={{ backgroundColor: 'red' }} onClick={geriGit}>Geri Dön</button>
+                    <button  className='geriDon' onClick={geriGit}>Geri Dön</button>
 
                 </div>
-            )}
+            
         </div>
     );
 };

@@ -55,4 +55,18 @@ body, html {
     background-color: darkred;
   }
 
+  .geriDon{
+    padding: 10px;
+    background-color: #ec1b1b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self:center;
+  }
+
+.geriDon:hover {
+    background-color: #841f09;
+  }
+  
  
