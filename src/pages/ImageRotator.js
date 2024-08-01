@@ -21,7 +21,7 @@ const ImageRotator = () => {
       if (images.length > 0) {
         setCurrentIndex(Math.floor(Math.random() * images.length));
       }
-    }, 8000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [images]);
