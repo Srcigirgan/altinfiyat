@@ -17,6 +17,10 @@ const Modal = ({ isOpen, onClose }) => {
     window.location.href = 'http://localhost:3000/tumfiyatlar';
   };
 
+  const handleClickUserManagement = () => {
+    window.location.href = 'http://localhost:3000/user-management';
+  };
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -28,7 +32,7 @@ const Modal = ({ isOpen, onClose }) => {
 
           </div> 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop:10 }}>
-            <button className='menuButton' onClick={handleClickUpload}>Kullanıcı İşlemleri</button>
+            <button className='menuButton' onClick={handleClickUserManagement}>Kullanıcı İşlemleri</button>
             <button className='menuButton' onClick={handleClickRecords} style={{ backgroundColor: 'green' }}>Altın Kayıtları</button>
 
 

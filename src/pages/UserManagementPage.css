@@ -1,0 +1,129 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .UserManagementPage {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../../assets/background.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+  }
+  
+  .card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    align-self: center;
+    margin: 10px;
+    word-wrap: break-word;
+  }
+  
+  .logo {
+    width: 220px;
+    height: 120px;
+    object-fit: contain;
+    margin: 10px;
+  }
+  
+  .user-list, .edit-user, .add-user {
+    margin: 20px 0;
+  }
+  
+  .user-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-list li {
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(224, 224, 224);
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  
+  .user-list li:hover {
+    background-color: rgb(204, 204, 204);
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    padding: 5px;
+    margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  @media (max-width: 599px) {
+    .card {
+      padding: 20px;
+    }
+    p {
+      font-size: 12px;
+    }
+    img {
+      width: 20px;
+      height: 20px;
+    }
+    h1 {
+      font-size: 18px;
+    }
+  }
+  
+  @media (min-width: 600px) and (max-width: 899px) {
+    .card {
+      padding: 30px;
+    }
+    p {
+      font-size: 15px;
+    }
+    img {
+      width: 25px;
+      height: 25px;
+    }
+    h1 {
+      font-size: 20px;
+    }
+  }
+  
+  @media (min-width: 900px) {
+    .card {
+      padding: 40px;
+    }
+    p {
+      font-size: 16px;
+    }
+    img {
+      width: 30px;
+      height: 30px;
+    }
+    h1 {
+      font-size: 22px;
+    }
+  }
+  

@@ -5,6 +5,7 @@ import ImageUpload from './pages/ImageUpload';
 import ImageList from './pages/ImageList';
 import LoginPage from './pages/LoginPage';
 import { TumFiyatlar } from './pages/TumFiyatlar';
+import UserManagementPage from './pages/UserManagementPage';
 
 const PrivateRoute = ({ element: Element, ...rest }) => {
   const token = localStorage.getItem('token');
@@ -20,6 +21,8 @@ export const RoutesP = () => {
         <Route path="/upload" element={<PrivateRoute element={ImageUpload} />} />
         <Route path="/images" element={<PrivateRoute element={ImageList} />} />
         <Route path="/tumfiyatlar" element={<PrivateRoute element={TumFiyatlar} />} />
+        <Route path="/user-management" element={<PrivateRoute element={UserManagementPage} />} />
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
