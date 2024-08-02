@@ -5,6 +5,7 @@ import ImageUpload from './pages/ImageUpload';
 import ImageList from './pages/ImageList';
 import LoginPage from './pages/LoginPage';
 import { TumFiyatlar } from './pages/TumFiyatlar';
+import { TumFiyatlarM } from './pages/TumFiyatlarM';
 import UserManagementPage from './pages/UserManagementPage';
 
 const PrivateRoute = ({ element: Element, ...rest }) => {
@@ -17,12 +18,17 @@ export const RoutesP = () => {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        
+        {/* Özel sayfalar için PrivateRoute kullanımı */}
         <Route path="/admin" element={<PrivateRoute element={AdminEntry} />} />
         <Route path="/upload" element={<PrivateRoute element={ImageUpload} />} />
         <Route path="/images" element={<PrivateRoute element={ImageList} />} />
         <Route path="/tumfiyatlar" element={<PrivateRoute element={TumFiyatlar} />} />
         <Route path="/user-management" element={<PrivateRoute element={UserManagementPage} />} />
-
+        
+        {/* Bu sayfa özel değil, doğrudan erişilebilir */}
+        <Route path="/all-prices" element={<TumFiyatlarM />} />
+        
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

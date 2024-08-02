@@ -97,6 +97,10 @@ function MainPage() {
     window.location.href = 'https://www.facebook.com/karamanaltinfiyatlari';
   };
 
+  const goAllPrices = () => {
+    window.location.href = '/all-prices';
+  };
+
   const formatDate = (dateString) => {
     const dateObj = new Date(dateString);
     const options = {
@@ -112,8 +116,11 @@ function MainPage() {
     <div className="App">
       <img className="logo" src={karamanAltin} alt="Açıklama" />
       <div className="card">
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom:5 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom:5 }}>
           <h1>{latestDate ? formatDate(latestDate) : 'Fiyatlar Yükleniyor...'}</h1>
+          <div  className='otherPrices' onClick={goAllPrices}>
+            <p style={{color:'white'}} >Diğer Tarihler</p>
+          </div>
         </div>
 
         <table className="invoice-table">

@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import './TumFiyatlar.css'; // CSS dosyasını içe aktar
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +21,8 @@ export const TumFiyatlar = () => {
   const [prices, setPrices] = useState({});
   const [dates, setDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
-  
+  const navigate = useNavigate();
+
   // Tarihleri ve fiyatları al
   useEffect(() => {
     const fetchDatesAndPrices = async () => {
@@ -46,10 +49,6 @@ export const TumFiyatlar = () => {
 
     fetchDatesAndPrices();
   }, []);
-  const geriGit = () => {
-    navigate('/admin');
-};
-const navigate = useNavigate();
 
   // Seçilen tarihe göre fiyatları getir
   useEffect(() => {
@@ -70,14 +69,36 @@ const navigate = useNavigate();
     }
   }, [selectedDate]);
 
+  // Veriyi sil
+  const handleDelete = async () => {
+    if (window.confirm('Bu tarihi silmek istediğinizden emin misiniz?')) {
+      try {
+        const response = await fetch(`http://localhost:3001/api/prices/${selectedDate}`, {
+          method: 'DELETE',
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        alert('Fiyat verisi başarıyla silindi');
+        setPrices({});
+        setSelectedDate('');
+        const updatedDates = dates.filter(date => date !== selectedDate);
+        setDates(updatedDates);
+      } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+      }
+    }
+  };
+
+  const geriGit = () => {
+    navigate('/admin');
+  };
+
   return (
     <div className="App">
-            <img className="logo" src={karamanAltin} alt="Açıklama" />
+      <img className="logo" src={karamanAltin} alt="Açıklama" />
 
       <div className="card">
-
-       
-        
         <div className="date-selector">
           <label htmlFor="date">Tarih Seç:</label>
           <select
@@ -85,7 +106,6 @@ const navigate = useNavigate();
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
           >
-            
             {dates.map((date) => (
               <option key={date} value={date}>
                 {new Date(date).toLocaleDateString('tr-TR')}
@@ -96,18 +116,21 @@ const navigate = useNavigate();
         <div className="date-header">
           <h1>{selectedDate ? new Date(selectedDate).toLocaleDateString('tr-TR') : 'Fiyatlar Yükleniyor...'}</h1>
         </div>
+          <div style={{display:'flex', justifyContent:'flex-end', marginRight:30 }} >
+        <button  className="delete-button" onClick={handleDelete}>Sil</button>
+        </div>
         <table className="invoice-table">
           <thead>
             <tr>
-              <th  style={{padding:'10px'}} className='box2'>Altın</th>
-              <th  style={{padding:'10px'}} className='box2'>Alış</th>
-              <th  style={{padding:'10px'}} className='box2'>Satış</th>
+              <th style={{ padding: '10px' }} className='box2'>Altın</th>
+              <th style={{ padding: '10px' }} className='box2'>Alış</th>
+              <th style={{ padding: '10px' }} className='box2'>Satış</th>
             </tr>
           </thead>
           <tbody>
             {Object.keys(labels).map((key) => (
               <tr key={key}>
-                <th  style={{padding:'10px'}} className={`box${key.includes('Eski') ? '1' : '2'}`}>{labels[key]}</th>
+                <th style={{ padding: '10px' }} className={`box${key.includes('Eski') ? '1' : '2'}`}>{labels[key]}</th>
                 <td className={`box${key.includes('Eski') ? '1' : '2'}`}>
                   {prices[key]}
                 </td>
@@ -120,11 +143,11 @@ const navigate = useNavigate();
         </table>
         <p className='grayText'>Karaman sarraflar derneği'nin tavsiye ettiği fiyat bildirimidir.</p>
       </div>
-      <button  className='geriDon' onClick={geriGit}>Geri Dön</button>
-
+      <button className='geriDon' onClick={geriGit}>Geri Dön</button>
     </div>
   );
-}
+};
+
 
 
 
