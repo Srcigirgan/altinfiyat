@@ -93,10 +93,13 @@ export const TumFiyatlar = () => {
   const geriGit = () => {
     navigate('/admin');
   };
+  const vazgec = () => {
+    navigate('/', { replace: true });
+  };
 
   return (
     <div className="App">
-      <img className="logo" src={karamanAltin} alt="Açıklama" />
+      <img onClick={vazgec} className="logo" src={karamanAltin} alt="Açıklama" />
 
       <div className="card">
         <div className="date-selector">

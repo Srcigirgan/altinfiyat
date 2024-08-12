@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './UserManagementPage.css'; // Import the CSS file
 import karamanAltin from '../assets/karamanAltin.png';
+import { useNavigate } from 'react-router-dom';
 
 const UserManagementPage = () => {
   const [users, setUsers] = useState([]);
@@ -30,6 +31,11 @@ const UserManagementPage = () => {
     setNewPassword(''); // Clear password field for editing
   };
 
+  const geriGit = () => {
+    navigate('/admin');
+};
+const navigate = useNavigate();
+
   const handleUsernameChange = (e) => {
     setNewUsername(e.target.value);
   };
@@ -44,6 +50,10 @@ const UserManagementPage = () => {
 
   const handleAddPasswordChange = (e) => {
     setAddPassword(e.target.value);
+  };
+
+  const vazgec = () => {
+    navigate('/', { replace: true });
   };
 
   const handleUpdateUser = async () => {
@@ -94,7 +104,7 @@ const UserManagementPage = () => {
 
   return (
     <div className="UserManagementPage">
-      <img className="logo" src={karamanAltin} alt="Logo" />
+      <img onClick={vazgec} className="logo" src={karamanAltin} alt="Logo" />
       <div className="card">
         <h1>Kullanıcı Seçenekleri</h1>
         <div className="user-list">
@@ -134,7 +144,10 @@ const UserManagementPage = () => {
             Şifre Oluşturun:
             <input type="password" value={addPassword} onChange={handleAddPasswordChange} />
           </label>
+          <div style={{display:'flex', justifyContent:'space-between'}} >
           <button style={{ backgroundColor: 'green' }} onClick={handleAddUser}>Kullanıcıyı Ekle</button>
+          <button style={{ backgroundColor: 'red' }} onClick={geriGit}>Geri Dön</button>
+          </div>
         </div>
       </div>
     </div>

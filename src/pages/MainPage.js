@@ -13,41 +13,33 @@ import karamanAltin from '../assets/karamanAltin.png';
 
 // RandomFractionBox bileşeni
 const RandomFractionBox = ({ initialNumber }) => {
-  const [number, setNumber] = useState(parseFloat(initialNumber) || 0);
-  const [prevFraction, setPrevFraction] = useState(Math.floor((number % 1) * 100));
+  const [fraction, setFraction] = useState(Math.floor(Math.random() * 100)); 
   const [bgColor, setBgColor] = useState('');
 
   useEffect(() => {
-    setNumber(parseFloat(initialNumber) || 0);
-  }, [initialNumber]);
-  
-  useEffect(() => {
     const updateRandomFraction = () => {
       const newFraction = Math.floor(Math.random() * 100);
-      const integerPart = Math.floor(number);
-      const newNumber = parseFloat(`${integerPart}.${newFraction}`);
 
-      if (newFraction > prevFraction) {
+      if (newFraction > fraction) {
         setBgColor('#d1ffbd');
-      } else if (newFraction < prevFraction) {
+      } else if (newFraction < fraction) {
         setBgColor('#ff7f7f');
       }
 
-      setTimeout(() => setBgColor(''), 500); // 0.5 saniye sonra arka plan rengini eski haline getir
+      setTimeout(() => setBgColor(''), 500);
 
-      setPrevFraction(newFraction);
-      setNumber(newNumber);
+      setFraction(newFraction);
     };
 
     const randomTime = Math.random() * 30000; // 0 ile 30 saniye arasında rastgele bir süre
     const interval = setInterval(updateRandomFraction, randomTime);
 
     return () => clearInterval(interval);
-  }, [number, prevFraction]);
+  }, [fraction]);
 
   return (
-    <div style={{ backgroundColor: bgColor, transition: 'background-color 0.5s', padding:'10px' }}>
-      {number.toFixed(2)} {/* number'ın bir sayı olduğundan emin olun */}
+    <div style={{ backgroundColor: bgColor, transition: 'background-color 0.5s', padding: '10px' }}>
+      {initialNumber}.{fraction.toString().padStart(2, '0')} 
     </div>
   );
 };
@@ -119,7 +111,7 @@ function MainPage() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom:5 }}>
           <h1>{latestDate ? formatDate(latestDate) : 'Fiyatlar Yükleniyor...'}</h1>
           <div  className='otherPrices' onClick={goAllPrices}>
-            <p style={{color:'white'}} >Diğer Tarihler</p>
+            <p  style={{color:'white'}} >Diğer Tarihler</p>
           </div>
         </div>
 

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './AdminEntry.css';
 import karamanAltin from '../assets/karamanAltin.png';
 import Modal from './Modal';
+import { jwtDecode } from 'jwt-decode';
 
 const labels = {
   bilezikFiyat: '22 Ayar Bilezik',
@@ -15,6 +16,8 @@ const labels = {
   ceyrekEskiFiyat: 'Çeyrek Altın (Eski)',
   cumhuriyetLiraEskiFiyat: 'Cumhuriyet Lira (Eski)',
 };
+
+
 
 const initialPrices = {
   bilezikFiyat: '',
@@ -48,6 +51,7 @@ const initialPrices = {
 
 export const AdminEntry = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
   const [alertType, setAlertType] = useState('');
   const [showAlert, setShowAlert] = useState(false);
@@ -55,15 +59,19 @@ export const AdminEntry = () => {
   const [prices, setPrices] = useState(initialPrices);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
 
+  
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
       navigate('/login');
     } else {
       setIsLoggedIn(true);
+      setUsername(getUserNameFromToken(token)); // Kullanıcı adını state'e ekleyin
       fetchPrices(token);  // Fiyatları al
     }
   }, [navigate]);
+
 
   const fetchPrices = async (token) => {
     try {
@@ -102,6 +110,19 @@ export const AdminEntry = () => {
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
+  };
+
+  const getUserNameFromToken = (token) => {
+    try {
+      const decoded = jwtDecode(token);
+      return decoded.username || 'User';
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return 'User';
+    }
+  };
+  const vazgec = () => {
+    navigate('/', { replace: true });
   };
 
   const handleUpdate = async () => {
@@ -172,8 +193,8 @@ export const AdminEntry = () => {
 
   return (
     <div className="App">
-      <img className="logo" src={karamanAltin} alt="Açıklama" />
-      {isLoggedIn && <h1 style={{ margin: '15px' }}>HOŞGELDİN USER</h1>}
+      <img onClick={vazgec} className="logo" src={karamanAltin} alt="Açıklama" />
+      {isLoggedIn && <h1 style={{ margin: '15px' }}>Merhaba {username}!</h1>}
       <button className='menuButton' onClick={openModal}>Menü</button>
       <Modal isOpen={isModalOpen} onClose={closeModal} />
       {isLoggedIn ? (

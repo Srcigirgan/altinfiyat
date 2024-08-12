@@ -49,6 +49,9 @@ export const TumFiyatlarM = () => {
   const geriGit = () => {
     navigate('/');
 };
+const vazgec = () => {
+  navigate('/', { replace: true });
+};
 const navigate = useNavigate();
 
   // Seçilen tarihe göre fiyatları getir
@@ -72,7 +75,7 @@ const navigate = useNavigate();
 
   return (
     <div className="App">
-            <img className="logo" src={karamanAltin} alt="Açıklama" />
+            <img onClick={vazgec} className="logo" src={karamanAltin} alt="Açıklama" />
 
       <div className="card">
 
